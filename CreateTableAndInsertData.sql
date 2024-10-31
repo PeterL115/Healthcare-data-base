@@ -1,0 +1,173 @@
+-- CREATE DATABASE IF NOT EXISTS Healthcaredb;
+-- use Healthcaredb;
+
+-- CREATE TABLE IF NOT EXISTS Patient (
+--     PatientID INT PRIMARY KEY AUTO_INCREMENT,
+--     FirstName VARCHAR(50) NOT NULL,
+--     LastName VARCHAR(50) NOT NULL,
+--     DateOfBirth DATE,
+--     Gender ENUM('Male', 'Female', 'Other'),
+--     Address VARCHAR(100),
+--     PhoneNumber VARCHAR(15),
+--     Email VARCHAR(100)
+-- );
+
+-- CREATE TABLE Department (
+--     DepartmentID INT PRIMARY KEY AUTO_INCREMENT,
+--     DepartmentName VARCHAR(50) NOT NULL,
+--     Location VARCHAR(100),
+--     PhoneExtension VARCHAR(10),
+--     HeadOfDepartment VARCHAR(50)
+-- );
+
+-- CREATE TABLE Doctor (
+--     DoctorID INT PRIMARY KEY AUTO_INCREMENT,
+--     DepartmentID INT,
+--     FirstName VARCHAR(50) NOT NULL,
+--     LastName VARCHAR(50) NOT NULL,
+--     Specialty VARCHAR(50),
+--     PhoneNumber VARCHAR(15),
+--     Email VARCHAR(100),
+--     OfficeLocation VARCHAR(100),
+--     LicenseNumber VARCHAR(20),
+--     FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID) ON DELETE SET NULL
+-- );
+
+-- CREATE TABLE Appointment (
+--     AppointmentID INT PRIMARY KEY AUTO_INCREMENT,
+--     PatientID INT,
+--     DoctorID INT,
+--     AppointmentDate DATE NOT NULL,
+--     AppointmentTime TIME NOT NULL,
+--     Reason VARCHAR(100),
+--     Status ENUM('Scheduled', 'Completed', 'Cancelled') NOT NULL,
+--     FOREIGN KEY (PatientID) REFERENCES Patient(PatientID) ON DELETE CASCADE,
+--     FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID) ON DELETE CASCADE
+-- );
+
+-- CREATE TABLE MedicalRecord (
+--     RecordID INT PRIMARY KEY AUTO_INCREMENT,
+--     PatientID INT,
+--     DoctorID INT,
+--     Diagnosis VARCHAR(100),
+--     TreatmentPlan TEXT,
+--     Prescription TEXT,
+--     RecordDate DATE NOT NULL,
+--     Notes TEXT,
+--     FOREIGN KEY (PatientID) REFERENCES Patient(PatientID) ON DELETE CASCADE,
+--     FOREIGN KEY (DoctorID) REFERENCES Doctor(DoctorID) ON DELETE SET NULL
+-- );
+
+-- CREATE TABLE Staff (
+--     StaffID INT PRIMARY KEY AUTO_INCREMENT,
+--     DepartmentID INT,
+--     FirstName VARCHAR(50) NOT NULL,
+--     LastName VARCHAR(50) NOT NULL,
+--     Role VARCHAR(50),
+--     PhoneNumber VARCHAR(15),
+--     Email VARCHAR(100),
+--     FOREIGN KEY (DepartmentID) REFERENCES Department(DepartmentID) ON DELETE SET NULL
+-- );
+
+-- INSERT INTO Patient (FirstName, LastName, DateOfBirth, Gender, Address, PhoneNumber, Email) VALUES
+-- ('John', 'Doe', '1985-04-12', 'Male', '123 Maple St, Springfield', '555-1234', 'john.doe@example.com'),
+-- ('Jane', 'Smith', '1990-08-25', 'Female', '456 Oak St, Springfield', '555-5678', 'jane.smith@example.com'),
+-- ('Emily', 'Johnson', '1975-02-14', 'Female', '789 Pine St, Springfield', '555-9012', 'emily.johnson@example.com'),
+-- ('Michael', 'Brown', '1988-07-30', 'Male', '101 Elm St, Springfield', '555-3456', 'michael.brown@example.com'),
+-- ('Sarah', 'Davis', '1995-11-11', 'Female', '202 Cedar St, Springfield', '555-7890', 'sarah.davis@example.com'),
+-- ('David', 'Miller', '1970-06-21', 'Male', '303 Birch St, Springfield', '555-2345', 'david.miller@example.com'),
+-- ('Sophia', 'Wilson', '1982-09-15', 'Female', '404 Walnut St, Springfield', '555-6789', 'sophia.wilson@example.com'),
+-- ('James', 'Moore', '1978-12-05', 'Male', '505 Ash St, Springfield', '555-0123', 'james.moore@example.com'),
+-- ('Olivia', 'Taylor', '1992-03-18', 'Female', '606 Maple St, Springfield', '555-4567', 'olivia.taylor@example.com'),
+-- ('Ethan', 'Anderson', '1983-10-22', 'Male', '707 Oak St, Springfield', '555-8901', 'ethan.anderson@example.com'),
+-- ('Ava', 'Thomas', '1974-01-08', 'Female', '808 Pine St, Springfield', '555-2346', 'ava.thomas@example.com'),
+-- ('Noah', 'Jackson', '1999-05-13', 'Male', '909 Elm St, Springfield', '555-6780', 'noah.jackson@example.com'),
+-- ('Mia', 'White', '1987-04-19', 'Female', '111 Cedar St, Springfield', '555-1235', 'mia.white@example.com'),
+-- ('Lucas', 'Harris', '1993-11-23', 'Male', '222 Birch St, Springfield', '555-5679', 'lucas.harris@example.com'),
+-- ('Isabella', 'Martinez', '1980-02-28', 'Female', '333 Walnut St, Springfield', '555-9013', 'isabella.martinez@example.com');
+
+-- INSERT INTO Department (DepartmentName, Location, PhoneExtension, HeadOfDepartment) VALUES
+-- ('Cardiology', 'Building A, Floor 3', '101', 'Dr. Emily Wright'),
+-- ('Neurology', 'Building B, Floor 2', '102', 'Dr. Michael Adams'),
+-- ('Orthopedics', 'Building C, Floor 1', '103', 'Dr. Sarah Johnson'),
+-- ('Pediatrics', 'Building A, Floor 4', '104', 'Dr. John Thompson'),
+-- ('Oncology', 'Building D, Floor 5', '105', 'Dr. Olivia Davis'),
+-- ('Radiology', 'Building E, Floor 1', '106', 'Dr. David Lee'),
+-- ('Dermatology', 'Building F, Floor 2', '107', 'Dr. Sophia Martinez'),
+-- ('Gastroenterology', 'Building G, Floor 3', '108', 'Dr. James White'),
+-- ('Endocrinology', 'Building H, Floor 2', '109', 'Dr. Ava Clark'),
+-- ('Urology', 'Building I, Floor 1', '110', 'Dr. Lucas Rodriguez'),
+-- ('Gynecology', 'Building J, Floor 3', '111', 'Dr. Mia Harris'),
+-- ('Hematology', 'Building K, Floor 4', '112', 'Dr. Isabella Lewis'),
+-- ('Psychiatry', 'Building L, Floor 2', '113', 'Dr. Ethan Walker'),
+-- ('Ophthalmology', 'Building M, Floor 1', '114', 'Dr. Noah Young'),
+-- ('Pulmonology', 'Building N, Floor 5', '115', 'Dr. Sophia Perez');
+
+-- INSERT INTO Doctor (FirstName, LastName, Specialty, PhoneNumber, Email, OfficeLocation, LicenseNumber, DepartmentID) VALUES
+-- ('Emily', 'Wright', 'Cardiologist', '555-1234', 'emily.wright@hospital.com', 'Office 301, Building A', 'C123456', 1),
+-- ('Michael', 'Adams', 'Neurologist', '555-5678', 'michael.adams@hospital.com', 'Office 202, Building B', 'N234567', 2),
+-- ('Sarah', 'Johnson', 'Orthopedic Surgeon', '555-9101', 'sarah.johnson@hospital.com', 'Office 103, Building C', 'O345678', 3),
+-- ('John', 'Thompson', 'Pediatrician', '555-1121', 'john.thompson@hospital.com', 'Office 401, Building A', 'P456789', 4),
+-- ('Olivia', 'Davis', 'Oncologist', '555-1314', 'olivia.davis@hospital.com', 'Office 501, Building D', 'O567890', 5),
+-- ('David', 'Lee', 'Radiologist', '555-1516', 'david.lee@hospital.com', 'Office 101, Building E', 'R678901', 6),
+-- ('Sophia', 'Martinez', 'Dermatologist', '555-1718', 'sophia.martinez@hospital.com', 'Office 201, Building F', 'D789012', 7),
+-- ('James', 'White', 'Gastroenterologist', '555-1920', 'james.white@hospital.com', 'Office 301, Building G', 'G890123', 8),
+-- ('Ava', 'Clark', 'Endocrinologist', '555-2122', 'ava.clark@hospital.com', 'Office 201, Building H', 'E901234', 9),
+-- ('Lucas', 'Rodriguez', 'Urologist', '555-2324', 'lucas.rodriguez@hospital.com', 'Office 101, Building I', 'U012345', 10),
+-- ('Mia', 'Harris', 'Gynecologist', '555-2526', 'mia.harris@hospital.com', 'Office 301, Building J', 'G123456', 11),
+-- ('Isabella', 'Lewis', 'Hematologist', '555-2728', 'isabella.lewis@hospital.com', 'Office 401, Building K', 'H234567', 12),
+-- ('Ethan', 'Walker', 'Psychiatrist', '555-2930', 'ethan.walker@hospital.com', 'Office 202, Building L', 'P345678', 13),
+-- ('Noah', 'Young', 'Ophthalmologist', '555-3132', 'noah.young@hospital.com', 'Office 101, Building M', 'O456789', 14),
+-- ('Sophia', 'Perez', 'Pulmonologist', '555-3334', 'sophia.perez@hospital.com', 'Office 501, Building N', 'P567890', 15);
+
+-- INSERT INTO Appointment (PatientID, DoctorID, AppointmentDate, AppointmentTime, Reason, Status) VALUES
+-- (1, 3, '2024-09-05', '09:00', 'Follow-up consultation', 'Completed'),
+-- (2, 1, '2024-09-06', '10:30', 'Routine check-up', 'Scheduled'),
+-- (3, 4, '2024-09-07', '11:00', 'Pediatric consultation', 'Cancelled'),
+-- (4, 2, '2024-09-08', '14:00', 'Neurology consultation', 'Completed'),
+-- (5, 5, '2024-09-09', '15:30', 'Oncology follow-up', 'Scheduled'),
+-- (6, 7, '2024-09-10', '08:30', 'Dermatology check-up', 'Completed'),
+-- (7, 6, '2024-09-11', '10:00', 'Radiology scan', 'Scheduled'),
+-- (8, 8, '2024-09-12', '12:00', 'Gastroenterology consultation', 'Completed'),
+-- (9, 9, '2024-09-13', '13:30', 'Endocrinology review', 'Scheduled'),
+-- (10, 10, '2024-09-14', '09:00', 'Urology consultation', 'Completed'),
+-- (11, 11, '2024-09-15', '14:00', 'Gynecology check-up', 'Scheduled'),
+-- (12, 12, '2024-09-16', '15:00', 'Hematology consultation', 'Cancelled'),
+-- (13, 13, '2024-09-17', '11:30', 'Psychiatry session', 'Completed'),
+-- (14, 14, '2024-09-18', '10:00', 'Ophthalmology examination', 'Scheduled'),
+-- (15, 15, '2024-09-19', '08:00', 'Pulmonology consultation', 'Completed');
+
+-- INSERT INTO MedicalRecord (PatientID, DoctorID, Diagnosis, TreatmentPlan, Prescription, RecordDate, Notes) VALUES
+-- (1, 3, 'Hypertension', 'Lifestyle changes, medication', 'Lisinopril 10mg daily', '2024-09-05', 'Patient advised to monitor blood pressure daily.'),
+-- (2, 1, 'Diabetes Type 2', 'Dietary changes, exercise, medication', 'Metformin 500mg twice daily', '2024-09-06', 'Discussed importance of blood sugar monitoring.'),
+-- (3, 4, 'Asthma', 'Inhaler use, avoid triggers', 'Albuterol inhaler as needed', '2024-09-07', 'Patient experienced mild wheezing last week.'),
+-- (4, 2, 'Migraine', 'Preventative medication, avoid triggers', 'Topiramate 50mg daily', '2024-09-08', 'Patient reports reduced frequency of headaches.'),
+-- (5, 5, 'Breast Cancer', 'Chemotherapy, surgery', 'Paclitaxel 175mg/m2 IV every 3 weeks', '2024-09-09', 'Patient scheduled for surgery next month.'),
+-- (6, 7, 'Eczema', 'Topical steroids, moisturizers', 'Hydrocortisone 1% cream as needed', '2024-09-10', 'Patient reports improvement with current treatment.'),
+-- (7, 6, 'Pneumonia', 'Antibiotics, rest, fluids', 'Amoxicillin 500mg three times daily', '2024-09-11', 'Follow-up chest X-ray in 2 weeks.'),
+-- (8, 8, 'Gastritis', 'Dietary modifications, antacids', 'Omeprazole 20mg daily', '2024-09-12', 'Patient advised to avoid spicy foods.'),
+-- (9, 9, 'Hypothyroidism', 'Thyroid hormone replacement', 'Levothyroxine 75mcg daily', '2024-09-13', 'Patient reports feeling more energetic.'),
+-- (10, 10, 'Kidney Stones', 'Pain management, increased fluid intake', 'Ibuprofen 600mg as needed', '2024-09-14', 'Patient passed stone, no further treatment needed.'),
+-- (11, 11, 'Osteoporosis', 'Calcium, Vitamin D, weight-bearing exercise', 'Alendronate 70mg weekly', '2024-09-15', 'Bone density scan in 6 months.'),
+-- (12, 12, 'Anemia', 'Iron supplements, dietary changes', 'Ferrous sulfate 325mg twice daily', '2024-09-16', 'Follow-up blood test in 4 weeks.'),
+-- (13, 13, 'Depression', 'Counseling, antidepressants', 'Sertraline 50mg daily', '2024-09-17', 'Patient reports improvement in mood.'),
+-- (14, 14, 'Cataracts', 'Surgical consultation', 'N/A', '2024-09-18', 'Patient referred to ophthalmologist for surgery.'),
+-- (15, 15, 'Chronic Obstructive Pulmonary Disease (COPD)', 'Inhaler use, pulmonary rehab', 'Tiotropium inhaler once daily', '2024-09-19', 'Patient instructed on proper inhaler technique.');
+
+-- INSERT INTO Staff (DepartmentID, FirstName, LastName, Role, PhoneNumber, Email) VALUES
+-- (1, 'John', 'Doe', 'Nurse', '555-1234', 'johndoe@hospital.com'),
+-- (2, 'Jane', 'Smith', 'Lab Technician', '555-5678', 'janesmith@hospital.com'),
+-- (3, 'Emily', 'Johnson', 'Pharmacist', '555-9101', 'emilyjohnson@hospital.com'),
+-- (4, 'Michael', 'Brown', 'Receptionist', '555-1122', 'michaelbrown@hospital.com'),
+-- (5, 'Linda', 'Davis', 'Radiology Technician', '555-1314', 'lindadavis@hospital.com'),
+-- (6, 'Robert', 'Miller', 'Medical Assistant', '555-1516', 'robertmiller@hospital.com'),
+-- (7, 'Patricia', 'Wilson', 'Surgical Assistant', '555-1718', 'patriciawilson@hospital.com'),
+-- (8, 'David', 'Moore', 'Billing Specialist', '555-1920', 'davidmoore@hospital.com'),
+-- (9, 'Susan', 'Taylor', 'Medical Records Clerk', '555-2022', 'susantaylor@hospital.com'),
+-- (10, 'James', 'Anderson', 'Custodian', '555-2223', 'jamesanderson@hospital.com'),
+-- (11, 'Barbara', 'Thomas', 'Dietitian', '555-2324', 'barbarathomas@hospital.com'),
+-- (12, 'William', 'Jackson', 'Physical Therapist', '555-2425', 'williamjackson@hospital.com'),
+-- (13, 'Elizabeth', 'White', 'Occupational Therapist', '555-2526', 'elizabethwhite@hospital.com'),
+-- (14, 'Richard', 'Harris', 'HR Specialist', '555-2627', 'richardharris@hospital.com'),
+-- (15, 'Jennifer', 'Martin', 'IT Support', '555-2728', 'jennifermartin@hospital.com');
+
